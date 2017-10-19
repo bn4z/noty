@@ -153,6 +153,29 @@ export function removeFromQueue (ref) {
  * @param {string} queueName
  * @return {void}
  */
+export function clearQueue (queueName) {
+  if (Queues.hasOwnProperty(queueName)) {
+    Queues[queueName].queue = []
+  }
+}
+
+/**
+ * @return {void}
+ */
+export function clearAllQueues () {
+  Object.keys(Queues).forEach(queueName => {
+    delete Queues[queueName]
+  })
+  Queues['global'] = {
+    maxVisible: DefaultMaxVisible,
+    queue: []
+  }
+}
+
+/**
+ * @param {string} queueName
+ * @return {void}
+ */
 export function queueRender (queueName = 'global') {
   if (Queues.hasOwnProperty(queueName)) {
     const noty = Queues[queueName].queue.shift()
