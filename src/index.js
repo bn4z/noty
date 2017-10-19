@@ -71,8 +71,10 @@ export default class Noty {
   show () {
     if (this.options.killer === true) {
       Noty.closeAll()
+      API.clearAllQueues()
     } else if (typeof this.options.killer === 'string') {
       Noty.closeAll(this.options.killer)
+      API.clearQueue(this.options.killer)
     }
 
     let queueCounts = API.getQueueCounts(this.options.queue)
